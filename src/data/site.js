@@ -26,15 +26,15 @@ export const navigation = [
 
 export const images = {
   hero: {
-    src: "/images/pilates-hero.webp",
+    src: `${import.meta.env.BASE_URL}images/pilates-hero.webp`,
     alt: "Mulher praticando um movimento de Pilates em reformer de madeira, em um espaço iluminado",
   },
   studio: {
-    src: "/images/studio-interior.webp",
+    src: `${import.meta.env.BASE_URL}images/studio-interior.webp`,
     alt: "Espaço de Pilates com equipamentos de madeira, plantas e iluminação natural",
   },
   lesson: {
-    src: "/images/pilates-aula.webp",
+    src: `${import.meta.env.BASE_URL}images/pilates-aula.webp`,
     alt: "Prática de alongamento no reformer em um ambiente equipado para Pilates",
   },
 };
@@ -83,14 +83,14 @@ export const professionals = [
     role: "Fisioterapeuta e instrutora de Pilates",
     description:
       "Acredita na escuta como ponto de partida. Conduz cada aula com atenção aos detalhes e respeito ao ritmo de cada pessoa.",
-    image: "/images/marina.webp",
+    image: `${import.meta.env.BASE_URL}images/marina.webp`,
   },
   {
     name: "Camila Nogueira",
     role: "Fisioterapeuta e especialista em movimento funcional",
     description:
       "Encontra no movimento uma forma de cuidar. Sua abordagem une orientação próxima, acolhimento e incentivo a cada descoberta.",
-    image: "/images/camila.webp",
+    image: `${import.meta.env.BASE_URL}images/camila.webp`,
   },
 ];
 

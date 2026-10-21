@@ -11,7 +11,7 @@ npm install
 npm run dev
 ```
 
-Abra a URL exibida pelo Vite, normalmente **http://127.0.0.1:5173/**. Se a porta estiver ocupada, o Vite informa a próxima disponível.
+Abra a URL exibida pelo Vite, normalmente **http://127.0.0.1:5173/PROJETO_PILATES/**. Se a porta estiver ocupada, o Vite informa a próxima disponível.
 
 ```sh
 npm run lint     # revisão estática
@@ -19,7 +19,7 @@ npm run build    # arquivos de produção em dist/
 npm run preview  # conferir o build localmente
 ```
 
-O projeto não foi publicado e não foi enviado ao GitHub.
+O workflow de publicação está em `.github/workflows/deploy.yml`; ele é executado ao enviar commits para `main` ou manualmente pela aba Actions.
 
 ## Verificação realizada
 
@@ -102,6 +102,18 @@ Os prompts dos retratos estão em [ASSETS.md](ASSETS.md).
 
 As fontes Cormorant Garamond e DM Sans são carregadas pelo Google Fonts; há fontes de sistema como fallback. Para produção sem serviços externos, hospede os arquivos de fonte localmente e adapte `index.html` e `src/styles.css`.
 
-## Preparação para hospedagem futura
+## Publicação no GitHub Pages
 
-O build estático está em `dist/`. Não é necessário servidor de aplicação. Quando houver um domínio aprovado, configure a URL absoluta de `og:image`, adicione `og:url` e uma URL canônica. Os valores relativos atuais permitem desenvolvimento sem inventar um endereço público. Não há publicação automática configurada.
+O Vite está configurado com `base: "/PROJETO_PILATES/"`. As imagens em JavaScript usam `import.meta.env.BASE_URL`; o favicon e o preload no HTML usam `%BASE_URL%`. O Vite também aplica esse prefixo aos arquivos JavaScript e CSS gerados. A imagem Open Graph usa uma URL absoluta do GitHub Pages com o mesmo prefixo.
+
+O workflow usa Node.js 24, executa `npm ci` e `npm run build`, envia a pasta `dist` como artefato e publica no ambiente `github-pages`. Não é necessário servidor de aplicação nem branch `gh-pages`. A configuração segue a [documentação oficial do Vite para GitHub Pages](https://vite.dev/guide/static-deploy.html#github-pages).
+
+1. No repositório, abra **Settings → Pages → Build and deployment → Source** e selecione **GitHub Actions**.
+2. Envie o commit para `main` com `git push origin main`.
+3. Acompanhe **Actions → Deploy to GitHub Pages** até a conclusão.
+
+O endereço esperado após a publicação é **https://henryglr.github.io/PROJETO_PILATES/**. Um commit local não inicia a publicação; o workflow precisa executar com sucesso no GitHub.
+
+Para conferir a versão de produção localmente, execute `npm run build` e `npm run preview`, depois abra **http://127.0.0.1:4173/PROJETO_PILATES/**.
+
+Se mudar o nome do repositório, atualize o `base` em `vite.config.js`. Se mudar a conta ou usar um domínio próprio, atualize também o domínio de `og:image` em `index.html`.
